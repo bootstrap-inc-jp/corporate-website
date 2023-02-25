@@ -1,4 +1,4 @@
 # Bootstrap Inc. corporate website
 
-URL -> https://bootstrap.xshiki.com/
+URL -> https://bt-strap.com/
 
