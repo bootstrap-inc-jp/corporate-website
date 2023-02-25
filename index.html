@@ -209,12 +209,10 @@
         </section>
         <script src="js/invaders.js"></script>
         <script>
-
             // invaders.jsの初期値
             coporateName = 'BOOTSTRAP INC.';
             successMessage = 'WE ARE HIRING!';
             email = 'hiroshi.kawada@bootstrap-inc.com';
-
             // 社名をネオンっぽくする
             (() => {
                 let chars = document.querySelectorAll('#top  h1 > span');
@@ -227,7 +225,6 @@
                     count++;
                 }, 200);
             })();
-
             // STARTを点滅させる
             (() => {
                 let blinks = document.querySelectorAll('.blink');
@@ -239,7 +236,6 @@
                     count++;
                 }, 500);
             })();
-
             // ゲーム開始
             (() => {
                 let cover = document.getElementById('cover');
@@ -254,7 +250,6 @@
                     }, 500);
                 });
             })();
-
             // ゲームコントローラー
             (() => {
                 let left = document.getElementById('left');
