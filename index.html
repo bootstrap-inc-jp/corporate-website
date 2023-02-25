@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <title>株式会社ブートストラップ（Bootstrap Inc.）</title>
+        <link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css" />
+        <style type="text/css">
+            @font-face {
+                font-family: "topFont";
+                src: url("/woff/title.woff") format("woff");
+            }
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, Avenir, "Helvetica Neue", "Segoe UI", Arial, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, "ＭＳ Ｐゴシック", sans-serif;
+            }
+            p {
+                line-height: 160%;
+                margin-bottom: 20px;
+            }
+            table {
+                display: table;
+            }
+            tr {
+                display: table-row;
+                vertical-align: baseline;
+            }
+            th, td {
+                display: table-cell;
+                padding: 5px 20px;
+            }
+            canvas {
+                display: block;
+                margin: 0 auto;
+                position :absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                
+                image-rendering: optimizeSpeed;
+                image-rendering: -moz-crisp-edges;
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: optimize-contrast
+            }
+            #controller {
+                font-family: -apple-system, BlinkMacSystemFont, Avenir, "Helvetica Neue", "Segoe UI", Arial, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, "ＭＳ Ｐゴシック", sans-serif;
+                display: block;
+                position :absolute;
+                bottom: 0;
+                width: 100%;
+                text-align: center;
+                font-size: 200%;
+                padding-bottom: 5vh;
+                user-select: none;
+            }
+            #controller .left-right {
+                font-size: 150%;
+            }
+            #controller #left,
+            #controller #right {
+                padding: 4px 12px;
+                border-radius: 40px;
+                background-color: #333333;
+            }
+            #controller #shoot {
+                padding: 20px 12px;
+                border-radius: 40px;
+                display: inline-block;
+                background-color: #333333;
+            }
+            #top {
+                font-family: "topFont";
+                background-color: #2E2E2E;
+                color: #ffffff;
+                font-size: 160%;
+                height: 100vh;
+                text-align: center;
+            }
+            #top h1 {
+                padding-top: 40vh;
+                font-size: 200%;
+                color: #2E2E2E;
+            }
+            #top .vision {
+                padding-top: 5vh;
+            }
+            #top .start {
+                padding-top: 2vh;
+            }
+            #top #cover:hover {
+                cursor: pointer;
+                height: 100vh;
+            }
+            #business {
+                padding: 40px 0px;
+                color: #2E2E2E;
+            }
+            #business h2 {
+                text-align: center;
+                font-size: 200%;
+            }
+            #business h3 {
+                padding-bottom: 12px;
+                text-align: center;
+            }
+            #business .content {
+                margin: 0 auto;
+                padding-top: 20px;
+                width: 98%;
+                max-width: 600px;
+            }
+            #business .button {
+                background-color: #2E2E2E;
+                display: block;
+                color: #ffffff;
+                font-weight: bold;
+                margin: 0 auto;
+                padding: 8px 48px;
+                width: 200px;
+                text-decoration: none;
+                border-radius: 24px;
+                text-align: center;
+            }
+            #business .button:hover {
+                opacity: 0.9;
+            }
+            #bio {
+                padding: 40px 0px;
+                color: #2E2E2E;
+            }
+            #bio h2 {
+                text-align: center;
+                font-size: 200%;
+            }
+            #bio .image {
+                width: 50%;
+                max-width: 200px;
+                border-radius: 200px;
+                margin: 0 auto;
+                margin-bottom: 20px;
+            }
+            #bio h3 {
+                padding-bottom: 12px;
+                text-align: center;
+            }
+            #bio .content {
+                margin: 0 auto;
+                padding-top: 20px;
+                width: 98%;
+                max-width: 600px;
+            }
+            #about {
+                padding: 40px 10px;
+                padding-bottom: 200px;
+                background-color: #000000;
+                color: #ffffff;
+            }
+            #about h2 {
+                text-align: center;
+                font-size: 200%;
+            }
+            #about .list {
+                padding-top: 20px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <section id='top'>
+            <div id='controller' style='display: none;'>
+                <div class='left-right'><span id='left'>◀</span>　<span id='right'>▶</span></div>
+                <div id='shoot'>SHOOT</div>
+            </div>
+            <canvas id="game-canvas" width="640" height="640" style='display: none;'></canvas>
+            <div id='cover' style='display: block;'>
+                <h1><span>B</span><span>O</span><span>O</span><span>T</span><span>S</span><span>T</span><span>R</span><span>A</span><span>P</span><span> </span><span>I</span><span>N</span><span>C</span><span>.</span></h1>
+                <div class='vision'>クリエイティブな活動が<br>もっとかがやける世界をつくる</div>
+                <div class='start blink'>TAP TO START</div>
+            </div>
+        </section>
+        <section id='business'>
+            <h2>事業概要</h2>
+            <div class='content'>
+                <h3>デジタルコンテンツ x Webプラットフォーム</h3>
+                <p>株式会社ブートストラップは、デジタルコンテンツに特化し、Web技術を活用したプラットフォームの開発ノウハウを強みとする集団です。ソーシャルメディアやECなど、依頼内容にあわせて体制を準備し、プラットフォームにクリエイターやファンが集まるよう開発やオペレーションを行います。</p>
+                <a class='button' href='xxxx'>お問い合わせ</a>
+            </div>
+        </section>
+        <section id='bio'>
+            <h2>役員情報</h2>
+            <div class='content'>
+                <img class='image' src='img/bio.jpg'>
+                <h3>代表取締役CEO 川田 寛</h3>
+                <p><strong>Web技術の専門家として</strong><br>2009年にNTTグループへ入社し、Web技術の研究とコンサルタントに従事しました。技術評論社「Software Design」などのいくつかの技術雑誌に寄稿、翔泳社「Developers Summit」や「HTML5 Conference」などの大規模技術カンファレンスへコンテンツを提供、またLPI-Japan「HTML5認定試験」などの公認試験の作成に関わるなど、フロントエンド技術の黎明期を草の根運動的に支えてきました。この活動が評価され、Microsoft MVP 2014-2017を受賞しています。</p>
+                <p><strong>コンテンツプラットフォームの専門家として</strong><br>2015年よりピクシブ株式会社に入社し、ECサービス「BOOTH」、ドローツール・ソーシャルメディア「pixiv Sketch」、動画配信サービス「pixiv Sketch LIVE」、Mastodonインスタンス「Pawoo」、3Dツール「VRoid」、Wikiサービス「ピクシブ百科事典」など、特性が異なる多種コンテンツプラットフォームづくりに開発者・執行役員・事業責任者などの様々な立場から関わりました。また2021年より、株式会社メディアドゥのVPoEとして同社のWeb3系サービスに関わるなど、一貫してデジタルコンテンツを取り扱うプラットフォームビジネスに関わりました。</p>
+                <p>2023年より、株式会社ブートストラップを創業。同社CEOとして、これまでに培ってきたWeb技術とコンテンツプラットフォームの開発・運用知識をさまざまな企業へ提供しています。</p>
+            </div>
+        </section>
+        <section id='about'>
+            <h2>会社概要</h2>
+            <table class='list'>
+                <tr><th>社　名</th><td>株式会社ブートストラップ<br>（英字表記 Bootstrap Inc.）</td></tr>
+                <tr><th>創　業</th><td>2023年4月（予定）</td></tr>
+                <tr><th>役　員</th><td>代表取締役CEO　川田 寛</td></tr>
+                <tr><th>主な事業</th><td>システム開発・運用</td></tr>
+            </table>
+        </section>
+        <script src="js/invaders.js"></script>
+        <script>
+
+            // invaders.jsの初期値
+            coporateName = 'BOOTSTRAP INC.';
+            successMessage = 'WE ARE HIRING!';
+            email = 'hiroshi.kawada@bootstrap-inc.com';
+
+            // 社名をネオンっぽくする
+            (() => {
+                let chars = document.querySelectorAll('#top  h1 > span');
+                let count = 0;
+                let colors = [ "RED", "YELLOW", "GREEN", "BLUE" ];
+                setInterval(() => {
+                    for(let i=0 ; i<chars.length ; i++) {
+                        chars[i].style.color = colors[(count+i)%colors.length];
+                    }
+                    count++;
+                }, 200);
+            })();
+
+            // STARTを点滅させる
+            (() => {
+                let blinks = document.querySelectorAll('.blink');
+                let count = 0;
+                setInterval(() => {
+                    blinks.forEach((blink) => {
+                        blink.style.color = count%2 ? '#FFF' : '#2E2E2E';
+                    });
+                    count++;
+                }, 500);
+            })();
+
+            // ゲーム開始
+            (() => {
+                let cover = document.getElementById('cover');
+                let game = document.getElementById('game-canvas');
+                let controller = document.getElementById('controller');
+                cover.addEventListener('click', () => {
+                    cover.style.display = 'none';
+                    setTimeout(()=> {
+                        game.style.display = 'block';
+                        controller.style.display = 'block';
+                        clickToStart = true;
+                    }, 500);
+                });
+            })();
+
+            // ゲームコントローラー
+            (() => {
+                let left = document.getElementById('left');
+                left.addEventListener('touchstart', () => {
+                    pressLeft = true;
+                });
+                left.addEventListener('touchend', () => {
+                    pressLeft = false;
+                });
+                let right = document.getElementById('right');
+                right.addEventListener('touchstart', () => {
+                    pressRight = true;
+                });
+                right.addEventListener('touchend', () => {
+                    pressRight = false;
+                });
+                let shoot = document.getElementById('shoot');
+                shoot.addEventListener('touchstart', () => {
+                    pressShoot = true;
+                });
+                shoot.addEventListener('touchend', () => {
+                    pressShoot = false;
+                });
+            })();
+
+        </script>
+    </body>
+</html>
