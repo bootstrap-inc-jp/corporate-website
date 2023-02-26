@@ -284,6 +284,20 @@
                     pressShoot = false;
                 });
             })();
+            // ダブルダップでの拡大を禁止
+            (() => {
+                document.documentElement.addEventListener('touchstart', (e) => {
+                    if (e.touches.length >= 2) {e.preventDefault();}
+                }, {passive: false});
+                let t = 0;
+                document.documentElement.addEventListener('touchend', (e) => {
+                    let now = new Date().getTime();
+                    if ((now - t) < 350){
+                        e.preventDefault();
+                    }
+                    t = now;
+                }, false);
+            })();
 
         </script>
     </body>
