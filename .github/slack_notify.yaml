@@ -1,0 +1,25 @@
+- name: Slack
+  uses: 8398a7/action-slack@v3
+  if: always()
+  with:
+    status: custom
+    custom_payload: 
+      {
+        attachments: [{
+          color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+          title: "${{ github.repository }} #${{ github.event.number}}",
+          title_link: "${{ github.event.pull_request.html_url }}",
+          text: "${{ github.event.pull_request.title }} #${{ github.event.number }}",
+          fields: [{
+            title: "Status",
+            value: "${{ job.status }}",
+            short: true
+          }, {
+            title: "Log",
+            value: `<${process.env.GITHUB_SERVER_URL}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Checks URL>`,
+            short: true
+          }]
+        }]
+      }
+  env:
+    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
