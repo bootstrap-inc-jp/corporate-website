@@ -1,4 +1,4 @@
-name: CI
+name: pull_request_changed
 
 on:
   pull_request:
