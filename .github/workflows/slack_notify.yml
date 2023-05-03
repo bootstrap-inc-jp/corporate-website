@@ -13,7 +13,7 @@ jobs:
           custom_payload: |
             {
               attachments: [{
-                title: "${{ github.repository }} #${{ github.event.number}}",
+                title: "${{ github.event.pull_request.title }} #${{ github.event.number }}",
                 title_link: "${{ github.event.pull_request.html_url }}",
               }]
             }        
