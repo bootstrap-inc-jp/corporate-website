@@ -1,26 +1,15 @@
-- name: Slack
-  uses: 8398a7/action-slack@v3
-  if: always()
-  # Fail時だけ通知したい場合は if: failure()
+steps:
+  - uses: 8398a7/action-slack@v3
   with:
     status: custom
-    custom_payload: 
+    fields: workflow,job,commit,repo,ref,author,took
+    custom_payload: |
       {
         attachments: [{
           color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-          title: "${{ github.repository }} #${{ github.event.number}}",
-          title_link: "${{ github.event.pull_request.html_url }}",
-          text: "${{ github.event.pull_request.title }} #${{ github.event.number }}",
-          fields: [{
-            title: "Status",
-            value: "${{ job.status }}",
-            short: true
-          }, {
-            title: "Log",
-            value: `<${process.env.GITHUB_SERVER_URL}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Checks URL>`,
-            short: true
-          }]
+          text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
         }]
       }
   env:
     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  if: always()
