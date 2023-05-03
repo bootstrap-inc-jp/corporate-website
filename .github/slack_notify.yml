@@ -1,21 +1,11 @@
-- name: Get author slack user_id
-  if: always()
-  run: |
-    EMAIL=$(git log -1 --pretty=format:%ae HEAD)
-    curl -s "https://slack.com/api/users.lookupByEmail?token=${TOKEN}&email=${EMAIL}" \
-      | jq -r .user.id \
-      | xargs -I{} echo "SLACK_USER={}" >> $GITHUB_ENV
-  env:
-    TOKEN: ${{ secrets.SLACK_BOT_OAUTH_TOKEN }}
 - name: Slack
   uses: 8398a7/action-slack@v3
   if: always()
   # Fail時だけ通知したい場合は if: failure()
   with:
     status: custom
-    custom_payload: |
+    custom_payload: 
       {
-        text: "<@${{ env.SLACK_USER }}>",
         attachments: [{
           color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
           title: "${{ github.repository }} #${{ github.event.number}}",
