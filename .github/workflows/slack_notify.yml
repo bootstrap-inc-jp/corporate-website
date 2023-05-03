@@ -12,14 +12,10 @@ jobs:
           status: custom
           custom_payload: |
             {
-              text: "Custom Field Check",
               attachments: [{
                 color: 'good',
                 title: "${{ github.repository }} #${{ github.event.number}}",
                 title_link: "${{ github.event.pull_request.html_url }}",
-                }],
-                actions: [{
-                }]
               }]
             }        
         env:
