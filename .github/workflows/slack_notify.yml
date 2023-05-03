@@ -7,38 +7,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get author slack user_id
-        if: always()
-        run: |
-          EMAIL=$(git log -1 --pretty=format:%ae HEAD)
-          curl -s "https://slack.com/api/users.lookupByEmail?token=${TOKEN}&email=${EMAIL}" \
-            | jq -r .user.id \
-            | xargs -I{} echo "SLACK_USER={}" >> $GITHUB_ENV
-        env:
-          TOKEN: ${{ secrets.SLACK_BOT_OAUTH_TOKEN }}
-      - name: Slack
-        uses: 8398a7/action-slack@v3
-        if: success()
+      - uses: 8398a7/action-slack@v3
         with:
           status: custom
           custom_payload: |
             {
-              text: "<@${{ env.SLACK_USER }}>",
+              text: "Custom Field Check",
               attachments: [{
-                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                title: "${{ github.repository }} #${{ github.event.number}}",
-                title_link: "${{ github.event.pull_request.html_url }}",
-                text: "${{ github.event.pull_request.title }} #${{ github.event.number }}",
+                "author_name": "8398a7@action-slack", // json
+                fallback: 'fallback',
+                color: 'good',
+                title: 'CI Result',
+                text: 'Succeeded',
                 fields: [{
-                  title: "Status",
-                  value: "${{ job.status }}",
+                  title: 'lower case',
+                  value: 'LOWER CASE CHECK'.toLowerCase(),
                   short: true
-                }, {
-                  title: "Log",
-                  value: `<${process.env.GITHUB_SERVER_URL}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Checks URL>`,
+                },
+                {
+                  title: 'reverse',
+                  value: 'gnirts esrever'.split('').reverse().join(''),
                   short: true
+                },
+                {
+                  title: 'long title1',
+                  value: 'long value1',
+                  short: false
+                }],
+                actions: [{
                 }]
               }]
-            }
+            }        
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
