@@ -1,34 +1,26 @@
-steps:
-  - uses: 8398a7/action-slack@v3
-    with:
-      status: custom
-      custom_payload: |
-        {
-          text: "Custom Field Check",
-          attachments: [{
-            "author_name": "8398a7@action-slack", // json
-            fallback: 'fallback',
-            color: 'good',
-            title: 'CI Result',
-            text: 'Succeeded',
-            fields: [{
-              title: 'lower case',
-              value: 'LOWER CASE CHECK'.toLowerCase(),
-              short: true
-            },
-            {
-              title: 'reverse',
-              value: 'gnirts esrever'.split('').reverse().join(''),
-              short: true
-            },
-            {
-              title: 'long title1',
-              value: 'long value1',
-              short: false
-            }],
-            actions: [{
-            }]
+- name: Slack
+  uses: 8398a7/action-slack@v3
+  if: always()
+  # Fail時だけ通知したい場合は if: failure()
+  with:
+    status: custom
+    custom_payload: |
+      {
+        attachments: [{
+          color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+          title: "${{ github.repository }} #${{ github.event.number}}",
+          title_link: "${{ github.event.pull_request.html_url }}",
+          text: "${{ github.event.pull_request.title }} #${{ github.event.number }}",
+          fields: [{
+            title: "Status",
+            value: "${{ job.status }}",
+            short: true
+          }, {
+            title: "Log",
+            value: `<${process.env.GITHUB_SERVER_URL}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Checks URL>`,
+            short: true
           }]
-        }        
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        }]
+      }
+  env:
+    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
