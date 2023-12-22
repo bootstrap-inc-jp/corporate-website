@@ -51,7 +51,10 @@
 
 **エンジニア**: インターネットサービスに関わるソフトウェア開発を担います。
 - 雇用形態: 正社員
-- 使用技術: フロントエンド(Next.js, TypeScript, TailwindCSS, Storybook 等) / バックエンド（Rust, Go, AWS AppSync, AWS App Runner, Amazon DynamoDB, CloudFlare 等) / DDD / GitHub
+- 使用技術:
+  - フロントエンド: Next.js, TypeScript, TailwindCSS, Storybook など
+  - バックエンド: Rust, Go, AWS AppSync, AWS App Runner, Amazon DynamoDB, CloudFlare など
+  - 共通: DDD / GitHub
 - 必須スキル: コンテンツ・クリエイター業界におけるドメイン知識への強い関心、ソフトウェアの開発経験
 - 歓迎スキル: 同人誌制作・創作活動の経験、DDDによる設計能力、スクラムによるチーム運営能力、Reactベースでのフロントエンド開発経験、サーバレスアーキテクチャによるバックエンド・インフラ実装
 
